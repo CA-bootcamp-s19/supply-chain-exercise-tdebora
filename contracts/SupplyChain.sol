@@ -128,9 +128,9 @@ modifier ownerContract{
 
   function buyItem(uint sku)
     public payable paidEnough(items[sku].price)forSale (sku) checkValue (sku){
-      uint money= items[sku].price;
-
-      //items[sku].seller.transfer(msg.value);
+      address payable seller = items[sku].seller;
+      seller.transfer(items[sku].price); 
+      
 
       items[sku].buyer = msg.sender;
       items[sku].state = uint (State.Sold);
